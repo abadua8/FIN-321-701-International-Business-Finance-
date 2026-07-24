@@ -1,0 +1,5 @@
+My name is Allan Jay Badua, and I’m an incoming senior at the Shidler College of Business at the University of Hawai‘i at Mānoa, where I’m double majoring in Management Information Systems and Finance. I’m passionate about understanding how technology and financial strategy come together to shape modern business, and I enjoy working on projects that challenge me to think analytically, solve problems creatively, and build systems that make processes more efficient.
+
+As I move into my final year, I’m focusing on strengthening my technical skills, expanding my knowledge of global markets, and preparing for a career at the intersection of tech and finance. In Fall 2026, I’ll be studying abroad at Yonsei University in Seoul, South Korea. I’m excited to immerse myself in a new culture, learn from an international academic environment, and experience one of Asia’s most innovative business and technology hubs.
+
+I’m driven by curiosity, continuous learning, and the goal of creating meaningful, practical solutions in every project I take on.
