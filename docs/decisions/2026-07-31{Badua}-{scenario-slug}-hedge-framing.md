@@ -1,14 +1,18 @@
-Hedging the EUR 4,500,000 Receivable Due in One Year
+Hedging the EUR 8,000,000 Receivable Due in One Year
+Created by: Allan Jay Badua
+Updated by: Allan Jay Badua
+Date Created: [7/31/2026]
+Date Updated: [8/7/2026]
+Version: [0.0] LLM Used: [Claude]
 
-Created by: [Allan Jay Badua] Updated by: [Allan Jay Badua] Date Created: [July 31, 2026] Date Updated: July 31, 2026 Version: 1.0 LLM Used: Claude
 
 Executive Summary
 
-Our firm expects a EUR 4,500,000 payment in one year. Because the euro amount is fixed but the dollar amount is not, an ordinary currency swing could shift USD proceeds by roughly $450,000 — a real budget risk, not a tail event. This memo frames that exposure in dollar terms and lays out three hedging approaches — a forward, a money-market hedge, and a put option — with honest trade-offs between certainty and upside. Rather than recommend one immediately, we propose a five-stage process: specify a hedging model, build and audit it, populate it with live market data, and validate the result before committing capital. We are requesting approval to begin Stage 2.
+Our firm, a U.S. Pharmaceutical Exporter, expects a EUR 8,000,000 payment in one year from European customers. Because the euro amount is fixed but the dollar amount is not, an ordinary currency swing could shift USD proceeds by roughly $800,000 — a real budget risk, not a tail event. This memo frames that exposure in dollar terms and lays out three hedging approaches — a forward, a money-market hedge, and a put option — with honest trade-offs between certainty and upside. Rather than recommend one immediately, we propose a five-stage process: specify a hedging model, build and audit it, populate it with live market data, and validate the result before committing capital. We are requesting approval to begin Stage 2.
 
 Background & Objectives
 
-The firm has a EUR 4,500,000 receivable settling in one year. Because we hold the currency risk until settlement, our USD cash flow depends on where EURUSD lands on that date rather than today. At EURUSD 1.10, proceeds are $4,950,000; at 1.00, proceeds are $4,500,000 — a $450,000 gap between two entirely plausible outcomes, given that a 9% move is well within a normal year for this pair. Left unhedged, this exposure flows directly into our USD revenue forecast, cash planning, and covenant headroom.
+The firm has a EUR 8,000,000 receivable settling in one year. Because we hold the currency risk until settlement, our USD cash flow depends on where EURUSD lands on that date rather than today. At current spot (EURUSD 1.0890), the receivable is worth $8,712,000. But spot in one year could easily land elsewhere: at EURUSD 1.14, proceeds would be $9,120,000; at 1.04, proceeds would be $8,320,000 — a $800,000 gap between two entirely plausible outcomes, given that a roughly 9% move is well within a normal year for this pair. Left unhedged, this exposure flows directly into our USD revenue forecast, cash planning, and covenant headroom.
 
 The primary objective is to protect the dollar value of this receivable against adverse EUR moves. A secondary objective is to do so without giving up more upside than necessary if the euro strengthens in our favor, and without committing to a hedge before we have priced the alternatives against each other on a consistent basis.
 
@@ -34,11 +38,11 @@ Ahead of the formal build, we are cross-checking early numbers against the FX He
 
 Limitations & Next Steps
 
-This analysis assumes the EUR 4,500,000 amount and one-year timing are firm; if either changes, the hedge size and tenor must be revisited. It also depends on forward points, interest rates, and option premiums that are not yet live — the figures above are illustrative until Stage 4. We have not yet formed a house view on the direction of EUR, so no family is being recommended at this stage; that judgment belongs in the Stage 5 recommendation, once real pricing is in hand.
+This analysis assumes the EUR 8,000,000 amount and one-year timing are firm; if either changes, the hedge size and tenor must be revisited. It also depends on forward points, interest rates, and option premiums that are not yet live — the figures above are illustrative until Stage 4. We have not yet formed a house view on the direction of EUR, so no family is being recommended at this stage; that judgment belongs in the Stage 5 recommendation, once real pricing is in hand.
 
 Immediate next steps:
 
 Treasury / FX Risk: build the Stage 2 model specification and circulate for review.
 CFO: approve proceeding to Stage 2 on this timeline, or flag a preferred hedge family to prioritize in the build.
 References
-FX Hedging Lab. (2026). FX Hedging Lab: Forward, Money-Market, and Option Hedge Calculator. Retrieved July 31, 2026, from https://adamwstauffer.github.io/ai-lms/fxlab.html
+FX Hedging Lab. (2026). FX Hedging Lab: Forward, Money-Market, and Option Hedge Calculator [pharma-exporter scenario]. Retrieved July 31, 2026, from https://adamwstauffer.github.io/ai-lms/fxlab.html?scenario=pharma-exporter
