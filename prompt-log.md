@@ -90,3 +90,27 @@ Deliverable: `docs/specs/2026-08-07-Badua-pharma-exporter-spec.md`
 **First `recalc.py` run:** `status: errors_found`, 6× `#N/A` in `Inputs!F13:F21`. Root cause: descriptive text notes had been written starting with `"= ..."`, which Excel/LibreOffice parses as a formula rather than text. Fixed by rewording those six cells to start with `"Note: ..."`; second `recalc.py` run returned `status: success`, `total_errors: 0`, `total_formulas: 145`.
 
 **Independent verification (not just recalc):** Pulled every named range's target cell via `wb.defined_names` and every check-figure's computed value via a `data_only=True` load, and hand-verified a sample of Sensitivity-grid rows against the underlying formulas (e.g. put payoff at `S_T = 1.09989` → `1.09989 × 8,000,000 − 176,942.5 = 8,622,177.5`, matches). Findings logged in `analysis/2026-08-07-Badua-build-audit.md`.
+
+---
+
+## Entry 6 — Phase 4 live-data population
+
+**Prompt to Claude:**
+> "Replace the placeholder inputs (S0_in, R_USD, R_FC, K_PUT, K_CALL) with live, sourced, timestamped market data. PREM_PUT stays a scenario assumption. Document every source and retrieval timestamp in a market-data memo, recalculate the workbook, and re-run every validation check."
+
+**What Claude did:** Retrieved live spot (Yahoo Finance EURUSD=X), U.S. Treasury 1-Yr CMT (R_USD), and 12M Euribor via EMMI/euribor-rates.eu (R_FC); entered all five values into the existing `Inputs` tab (no structural changes — the named-range contract held without a single formula edit); re-ran `recalc.py` (0 errors, 145 formulas); re-verified parity, put-kink, and grid-symmetry checks (all PASS); and additionally cross-checked the live-data forward/money-market outputs against the FX Hedging Lab (adamwstauffer.github.io/ai-lms/fxlab.html), diagnosing and documenting a reconciled $3,629 (0.039%) gap traced to a day-count-basis convention difference (this workbook splits ACT/360-USD/ACT/365-EUR; the lab uses T/360 uniformly) — both tools internally correct, no workbook change made. Full sourcing, rationale, and the cross-check writeup are in `data/2026-08-07-Badua-market-data.md`.
+
+---
+
+## Entry 7 — Phase 5 independent validation (fresh-session test of the spec + memo)
+
+**Prompt to Claude (fresh session, no history, spec + market-data memo only, verbatim):**
+> "Attached are two documents for a treasury FX hedging analysis: a technical specification and a market-data memo. Using only these two documents, compute the USD proceeds for all four strategies (no hedge, forward, money-market, and put option) across the specification's sensitivity grid, and produce a call-option outcome if the documents support it. Show your formulas in named-range notation. Conclude with a recommended hedge strategy for the CFO. Do not ask me for the underlying workbook — work from these two documents only."
+
+**What the fresh session got right:** every formula (DF_USD, DF_FC, F0_in, FV_PREM_PUT), correct substitution of the live market-data-memo values, exact-to-the-dollar forward, money-market, and put-floor figures.
+
+**What it got wrong:** built the sensitivity grid around the spec's illustrative placeholder example (`S0_in = 1.0890`, the literal grid printed in spec §6) instead of rebuilding it around the live `S0_in = 1.1525` the memo supplied. This silently erased the put option's upside participation across the entire tested range and produced a "forward always wins" recommendation that doesn't hold once the correct live grid is used — the put and no-hedge strategies both overtake the forward once EUR appreciates far enough, and the correct grid reaches into that territory while the LLM's stale one never does. It also correctly declined to compute a call-option premium, since neither document states the put-call-parity formula the workbook actually uses — a legitimate call-out, not an error.
+
+**Fix applied:** none to the LLM's output — per the exercise's design, the run was not corrected. The discrepancy, its root cause, and its downstream effect on the recommendation are documented and diagnosed in full in `analysis/2026-08-14-Badua-pharma-exporter-validation.md` (Parts 1–2), with the raw output preserved verbatim in the linked appendix, and traced back to a specific spec-authoring gap in the Part 4 retrospective (mixing a general grid formula with a scenario-specific worked example in the same section, with no marker distinguishing the two).
+
+**Why this matters:** this is exactly the kind of error hand-auditing catches and a recalc pass never would — every number the fresh LLM produced was internally consistent and formula-correct; the workbook it implied would show zero formula errors. The mistake was upstream, in which inputs it chose to trust, not in how it computed with them.
